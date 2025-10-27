@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ animal.nombre }} | Tienda de Mascotas{% endblock %}
+
+{% block contenido %}
+<div class="row g-5">
+    <!-- Información del animal -->
+    <div class="col-lg-6">
+        <div class="card shadow-sm">
+            {% if animal.foto_animal %}
+                <img src="{{ animal.foto_animal.url }}" class="card-img-top" style="height: 300px; object-fit: cover;" alt="Foto de {{ animal.nombre }}">
+            {% else %}
+                <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 300px;">
+                    <i class="bi bi-image" style="font-size: 5rem; color: #6c757d;"></i>
+                </div>
+            {% endif %}
+            <div class="card-body">
+                <h3>{{ animal.nombre }}</h3>
+                <p><strong>Especie:</strong> {{ animal.especie }}</p>
+                <p><strong>Edad:</strong> {{ animal.edad }} años</p>
+                <p><strong>Peso:</strong> {{ animal.peso }} kg</p>
+                <p><strong>Alimentación:</strong> {{ animal.alimentacion }}</p>
+                <p><strong>Proveedor:</strong> {{ animal.id_proveedor.compañia }}</p>
+                
+                <div class="d-grid gap-2 mt-3">
+                    <a href="{% url 'app_tienda:editar_animal' animal.id %}" class="btn btn-warning">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
+                    <a href="{% url 'app_tienda:borrar_animal' animal.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i> Borrar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cuidados y Enfermedades -->
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-info text-white">
+                <h4><i class="bi bi-heart-pulse"></i> Cuidados Especiales</h4>
+            </div>
+            <div class="card-body">
+                <h5>Cuidados:</h5>
+                <p>{{ animal.cuidados }}</p>
+                
+                <h5 class="mt-4">Enfermedades:</h5>
+                {% if animal.enfermedades %}
+                    <p>{{ animal.enfermedades }}</p>
+                {% else %}
+                    <p class="text-muted">No registra enfermedades</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

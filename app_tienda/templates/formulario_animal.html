@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ titulo }} | Tienda de Mascotas{% endblock %}
+
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h4><i class="bi bi-pencil-square"></i> {{ titulo }}</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Nombre del animal</label>
+                            {{ form.nombre }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Especie</label>
+                            {{ form.especie }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Edad (años)</label>
+                            {{ form.edad }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Peso (kg)</label>
+                            {{ form.peso }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Alimentación</label>
+                            {{ form.alimentacion }}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Cuidados</label>
+                        {{ form.cuidados }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Enfermedades (opcional)</label>
+                        {{ form.enfermedades }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Proveedor</label>
+                        {{ form.id_proveedor }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Foto del animal</label>
+                        {{ form.foto_animal }}
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-save"></i> Guardar
+                        </button>
+                        <a href="{% url 'app_tienda:listar_animales' %}" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
